@@ -9,12 +9,12 @@ let coords = {"latitude":0, "longitude":0};
  *   - The IP address as a string (null if error). Example: "162.245.144.188"
  */
 
- const fetchMyIP = function(callback) { 
+const fetchMyIP = function(callback) {
   // use request to fetch IP address from JSON API
   request("https://api.ipify.org/?format=json", (error, response, body) => {
     if (error) return callback(error, null);
   
-    if(response.statusCode !== 200) {
+    if (response.statusCode !== 200) {
       callback(Error(`Status Code ${response.StatusCode} when fetching IP: ${body}`), null);
       return;
     }
@@ -24,16 +24,16 @@ let coords = {"latitude":0, "longitude":0};
   });
 };
 
-const fetchCoordsByIP = function(ip, callback){
+const fetchCoordsByIP = function (ip, callback) {
   request(`https://freegeoip.app/json/${ip}`, (error, response, body) => {
     // console.log(response.statusCode);
     // console.log(body);
-    if (error){
+    if (error) {
       callback(error, null);
       return;
     }
   
-    if(response.statusCode !== 200) {
+    if (response.statusCode !== 200) {
       callback(Error(`Status Code ${response.StatusCode} when fetching IP: ${body}`), null);
       return;
     }
@@ -44,9 +44,9 @@ const fetchCoordsByIP = function(ip, callback){
     callback(null, coords);
     // console.log(body);
   });
-}
+};
 
 module.exports = {
-fetchMyIP,
-fetchCoordsByIP
-} 
+  fetchMyIP,
+  fetchCoordsByIP
+};
